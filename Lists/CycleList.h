@@ -18,11 +18,9 @@ class CycleList : public IContainer<T>
 public:
     ~CycleList()
     {
-        for (auto i = 0; i < m_nodes; ++i)
+        while(m_head)
         {
-            auto tmp = m_head->next;
-            delete m_head;
-            m_head = tmp;
+            erase(1);
         }
     }
 
@@ -42,7 +40,7 @@ public:
             index--;
             run = run->next;
         }
-        node->next = run->next->next;
+        node->next = run->next;
         run->next = node;
     }
     void erase(size_t index) override
